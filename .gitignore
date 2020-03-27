@@ -1,0 +1,6 @@
+*.iml
+*.conf
+.idea/
+target/
+test/
+resources/
