@@ -13,7 +13,7 @@ public class Table {
     }
 
     public void setHeaders(String... headers) {
-        for (String s: headers) {
+        for (String s : headers) {
             columns.put(s, s.length());
         }
     }
@@ -22,12 +22,12 @@ public class Table {
         List<String> row = new ArrayList<>(Arrays.asList(values));
         rows.add(row);
 
-        int i = 0;
+        int columnNum = 0;
         for (Map.Entry<String, Integer> entry : columns.entrySet()) {
-            if (row.get(i).length() > entry.getValue()) {
-                columns.replace(entry.getKey(), row.get(i).length());
+            if (row.get(columnNum).length() > entry.getValue()) {
+                columns.replace(entry.getKey(), row.get(columnNum).length());
             }
-            i++;
+            columnNum++;
         }
     }
 
@@ -39,31 +39,25 @@ public class Table {
         // Header line
         for (Map.Entry<String, Integer> entry : columns.entrySet()) {
             table.append(entry.getKey());
-            if (entry.getKey().length() < entry.getValue()) {
-                int n = entry.getValue() - entry.getKey().length();
-                for (int i = 0; i < n; ++i) {
-                    table.append(" ");
-                }
+
+            int widthDifference = entry.getValue() - entry.getKey().length();
+            if (widthDifference > 0) {
+                table.append(" ".repeat(widthDifference));
             }
+
             table.append(" ");
         }
         table.append("\n");
 
         // Table separator line
-        for (int i : columns.values()) {
-            for (int j = 0; j < i; ++j) {
-                table.append("-");
-            }
-            table.append(" ");
+        for (int width : columns.values()) {
+            table.append("-".repeat(width)).append(" ");
         }
         table.append("\n");
 
         // Rows
         for (List<String> row : rows) {
-            for (String s: row) {
-                table.append(s).append(" ");
-            }
-            table.append("\n");
+            table.append(String.join(" ", row)).append("\n");
         }
 
         return table.toString();
@@ -71,19 +65,14 @@ public class Table {
 
     private void fixRowWidths() {
         for (List<String> row : rows) { // for each row in the table
-            int i = 0;
-            for (Map.Entry<String, Integer> entry : columns.entrySet()) { // for each header
-                if (row.get(i).length() < entry.getValue()) { // if length of a value in a given row is lower than the column width
-                    int widthDifference = entry.getValue() - row.get(i).length();
-                    String value = row.get(i);
-                    for (int j = 0; j < widthDifference; ++j) {
-                        value = value.concat(" ");
-                    }
-                    row.set(i, value);
+            int columnNum = 0;
+            for (int columnWidth : columns.values()) { // for each column
+                int widthDifference = columnWidth - row.get(columnNum).length();
+                if (widthDifference > 0) {
+                    row.set(columnNum, row.get(columnNum) + " ".repeat(widthDifference));
                 }
-                i++;
+                columnNum++;
             }
-
         }
     }
 }
