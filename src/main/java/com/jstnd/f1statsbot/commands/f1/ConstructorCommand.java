@@ -42,15 +42,15 @@ public class ConstructorCommand extends Command {
                         .setThumbnail(rs.getString("logo_url"))
                         .addField("Nationality", rs.getString("nationality"), true)
                         .addField("Active Seasons", !rs.getString("active_seasons").isEmpty() ? rs.getString("active_seasons") : "N/A", true)
-                        .addField("Best WCC Position", rs.getInt("best_wcc_pos") != 404 ? "" + rs.getInt("best_wcc_pos") : "N/A", true)
+                        .addField("Best WCC Position", rs.getInt("best_wcc_pos") != 404 ? String.valueOf(rs.getInt("best_wcc_pos")) : "N/A", true)
                         .addField("Constructors' Championships", rs.getString("wcc_wins"), false)
                         .addField("Drivers' Championships", rs.getString("wdc_wins"), false)
-                        .addField("Race Entries", "" + rs.getInt("race_entries"), true)
-                        .addField("Race Wins", "" + rs.getInt("race_wins"), true)
-                        .addField("Points", "" + rs.getDouble("points"), true)
-                        .addField("Poles", "" + rs.getInt("pole_positions"), true)
-                        .addField("Podiums", "" + rs.getInt("race_podiums"), true)
-                        .addField("Fastest Laps", "" + rs.getInt("fastest_laps"), true);
+                        .addField("Race Entries", String.valueOf(rs.getInt("race_entries")), true)
+                        .addField("Race Wins", String.valueOf(rs.getInt("race_wins")), true)
+                        .addField("Points", String.valueOf(rs.getDouble("points")), true)
+                        .addField("Poles", String.valueOf(rs.getInt("pole_positions")), true)
+                        .addField("Podiums", String.valueOf(rs.getInt("race_podiums")), true)
+                        .addField("Fastest Laps", String.valueOf(rs.getInt("fastest_laps")), true);
             }
         } catch (SQLException e) {
             e.printStackTrace();

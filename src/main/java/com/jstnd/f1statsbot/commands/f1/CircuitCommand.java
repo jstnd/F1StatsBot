@@ -44,7 +44,7 @@ public class CircuitCommand extends Command {
                         .addField("", "", true)
                         .addField("Lap Record", rs.getString("lap_record"), true)
                         .addField("Length", rs.getString("length"), true)
-                        .addField("Turns", "" + rs.getInt("turns"), true)
+                        .addField("Turns", String.valueOf(rs.getInt("turns")), true)
                         .addField("Top Drivers", rs.getString("top_drivers"), true)
                         .addField("Top Constructors", rs.getString("top_constructors"), true);
             }

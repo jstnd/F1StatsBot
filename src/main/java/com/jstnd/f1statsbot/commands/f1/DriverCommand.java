@@ -43,17 +43,17 @@ public class DriverCommand extends Command {
                         .addField("Born", rs.getString("dob"), true)
                         .addField(!rs.getString("dod").isEmpty() ? "Died" : "", rs.getString("dod"), true)
                         .addField("Active Seasons", rs.getString("active_seasons"), true)
-                        .addField("Best WDC Position", rs.getInt("best_wdc_pos") != 404 ? "" + rs.getInt("best_wdc_pos") : "N/A", true)
+                        .addField("Best WDC Position", rs.getInt("best_wdc_pos") != 404 ? String.valueOf(rs.getInt("best_wdc_pos")) : "N/A", true)
                         .addField(!rs.getString("perm_number").isEmpty() ? "Permanent Number" : "", rs.getString("perm_number"), true)
                         .addField("Teams", rs.getString("teams"), true)
                         .addField("Drivers' Championships", rs.getString("wdc_wins"), true)
                         .addField("", "", true)
-                        .addField("Race Entries", "" + rs.getInt("race_entries"), true)
-                        .addField("Race Wins", "" + rs.getInt("race_wins"), true)
-                        .addField("Points", "" + rs.getDouble("points"), true)
-                        .addField("Poles", "" + rs.getInt("pole_positions"), true)
-                        .addField("Podiums", "" + rs.getInt("race_podiums"), true)
-                        .addField("Fastest Laps", "" + rs.getInt("fastest_laps"), true);
+                        .addField("Race Entries", String.valueOf(rs.getInt("race_entries")), true)
+                        .addField("Race Wins", String.valueOf(rs.getInt("race_wins")), true)
+                        .addField("Points", String.valueOf(rs.getDouble("points")), true)
+                        .addField("Poles", String.valueOf(rs.getInt("pole_positions")), true)
+                        .addField("Podiums", String.valueOf(rs.getInt("race_podiums")), true)
+                        .addField("Fastest Laps", String.valueOf(rs.getInt("fastest_laps")), true);
             }
         } catch (SQLException e) {
             e.printStackTrace();
